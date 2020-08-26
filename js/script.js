@@ -11,12 +11,14 @@ function DomElement(selector, height, width, bg, fontSize, position){
 
 DomElement.prototype.createEl = function() {
   
-  let elem = document.createElement(this.selector.slice(1));
+  let elem;
   let elemText = prompt('Введите содержимое элемента');
   if (this.selector[0] === '.') {
+    elem = document.createElement('div');
     elem.classList.add(this.selector.replace(/[^a-z\s]+/ig, ""));
   }
   if (this.selector[0] === '#') {
+    elem = document.createElement('p');
     elem.id = this.selector.replace(/[^a-z\s]+/ig, "");
   }
   elem.style.cssText = `
@@ -53,7 +55,7 @@ DomElement.prototype.createEl = function() {
 };
 
 
-let DomElement1 = new DomElement('.div', '100px', '100px', 'red', '14px', 'absolute');
+let DomElement1 = new DomElement('#best', '100px', '100px', 'red', '14px', 'absolute');
 DomElement1.createEl();
 
 
