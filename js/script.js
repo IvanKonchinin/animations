@@ -1,61 +1,41 @@
 'use strict';
 
-function DomElement(selector, height, width, bg, fontSize, position){
-  this.selector = selector;
-  this.height = height;
-  this.width = width;
-  this.bg = bg;
-  this.fontSize = fontSize;
-  this.position = position;
+const carWrap = document.querySelector('.car-wrap');
+const startDrive = document.querySelector('#start-drive');
+const resetDrive = document.querySelector('#reset-drive');
+const weel1 = document.querySelector('.weel1');
+const weel2 = document.querySelector('.weel2');
+let driveInterval;
+let count = 0;
+let driveAnimate = function(){
+  driveInterval = requestAnimationFrame(driveAnimate);
+  count++;
+  if(count < 1000){
+    carWrap.style.left = count + 'px';
+    weel1.style.transform = 'rotate(' + count*4 + 'deg)';
+    weel2.style.transform = 'rotate(' + count*4 + 'deg)';
+  }
+  else {
+    cancelAnimationFrame(driveInterval);
+  }
 }
-
-DomElement.prototype.createEl = function() {
-  
-  let elem;
-  let elemText = prompt('Введите содержимое элемента');
-  if (this.selector[0] === '.') {
-    elem = document.createElement('div');
-    elem.classList.add(this.selector.replace(/[^a-z\s]+/ig, ""));
+let animate = true;
+startDrive.addEventListener('click', function(){
+  if(animate){
+    driveInterval = requestAnimationFrame(driveAnimate);
+    animate = false;
+  }else{
+    animate = true;
+    cancelAnimationFrame(driveInterval);
   }
-  if (this.selector[0] === '#') {
-    elem = document.createElement('p');
-    elem.id = this.selector.replace(/[^a-z\s]+/ig, "");
-  }
-  elem.style.cssText = `
-    height:${this.height};
-    width:${this.width};
-    background:${this.bg};
-    font-size:${this.fontSize};
-    position:${this.position};
-  `;
-  elem.textContent = elemText;
+})
 
-  document.addEventListener('DOMContentLoaded', function () {
-    document.body.append(elem);
-  });
-  
-  document.addEventListener('keydown', function (e) {
-    let computedStyleRight = +getComputedStyle(elem).right.replace(/[^0-9\s]+/ig, "");
-    let computedStyleTop = +getComputedStyle(elem).top.replace(/[^0-9\s]+/ig, "");
-    
-    if(e.code === 'ArrowLeft'){
-      elem.style.right = (computedStyleRight + 10) + 'px';
-      console.log(elem.style.right);
-    }
-    if (e.code === 'ArrowRight') {
-      elem.style.right = (computedStyleRight - 10) + 'px';
-    }
-    if (e.code === 'ArrowUp') {
-      elem.style.top = (computedStyleTop - 10) + 'px';
-    }
-    if (e.code === 'ArrowDown') {
-      elem.style.top = (computedStyleTop + 10) + 'px';
-    }
-  }.bind(this));
-};
-
-
-let DomElement1 = new DomElement('#best', '100px', '100px', 'red', '14px', 'absolute');
-DomElement1.createEl();
+resetDrive.addEventListener('click', function(){
+  carWrap.style.left = 0;
+  weel1.style.transform = 'rotate(0)';
+  weel2.style.transform = 'rotate(0)';
+  count = 0;
+  cancelAnimationFrame(driveInterval);
+})
 
 

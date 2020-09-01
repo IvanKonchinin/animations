@@ -1,0 +1,51 @@
+.car-wrap{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.car-wrap img{
+  width: 200px;
+  bottom: -5px;
+  position: relative;
+  left: 0;
+}
+.weel1{
+  position: absolute;
+  width: 50px;
+  height: 37px;
+  background: url(../img/car-wheel.png) no-repeat;
+  background-size: 100%;
+  bottom: -1px;
+  left: 15px;
+  z-index: 100;
+}
+.driver{
+  width: 50px;
+  height: 40px;
+  background: url(../img/driver1.png) no-repeat;
+  background-size: 60%;
+  position: absolute;
+  top: 14px;
+  left: 89px;
+}
+.weel2 {
+  position: absolute;
+  width: 50px;
+  height: 37px;
+  background: url(../img/car-wheel.png) no-repeat;
+  background-size: 100%;
+  bottom: -1px;
+  right: 13px;
+  z-index: 100;
+}
+.road{
+  border-bottom: 10px solid #000;
+  position: relative;
+  height: 110px;
+  background: url(../img/tree.png) 0px 5px;
+  background-repeat-x: repeat;
+  background-repeat-y: no-repeat;
+  background-size: contain;
+  margin-bottom: 10px;
+  margin-top: 300px;
+}
